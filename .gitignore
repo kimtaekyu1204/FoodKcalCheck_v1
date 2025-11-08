@@ -1,0 +1,43 @@
+# CheckFood 프로젝트 .gitignore
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Docker
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs (이미 하위 폴더 .gitignore에서 처리됨)
+# android/build/
+# android/app/build/
+# backend-spring/build/
+# backend-spring/bin/
+
+# Local configuration
+android/local.properties
+backend-spring/local.properties
+
+# Test images (선택적 - 샘플 이미지는 포함할 수도 있음)
+# Test_IMG/
+
+# Archive (선택적 - 문서 아카이브는 포함할 수도 있음)
+# docs/archive/
+

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "message": "음식 인식 완료",
+  "food_count": 2,
+  "food1_name": "쌀밥",
+  "food1_calories": 310,
+  "food2_name": "된장찌개",
+  "food2_calories": 140,
+  "food3_name": null,
+  "food3_calories": null,
+  "total_calories": 450
+}

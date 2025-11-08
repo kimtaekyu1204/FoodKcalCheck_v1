@@ -1,0 +1,65 @@
+{
+  "_comment": "음식별 칼로리 정보 매핑 (참고용 - 모델이 칼로리를 직접 예측합니다)",
+  "_instruction": "모델이 칼로리를 직접 회귀로 예측하므로, 이 파일은 참고용입니다",
+  "_note": "모델 학습 시 labels.csv의 칼로리 정보를 사용합니다",
+  "김치찌개": {
+    "calories_per_100g": 39,
+    "standard_serving_g": 300,
+    "standard_calories": 117,
+    "unit": "1인분"
+  },
+  "된장찌개": {
+    "calories_per_100g": 50,
+    "standard_serving_g": 300,
+    "standard_calories": 150,
+    "unit": "1인분"
+  },
+  "쌀밥": {
+    "calories_per_100g": 130,
+    "standard_serving_g": 210,
+    "standard_calories": 273,
+    "unit": "1공기"
+  },
+  "현미밥": {
+    "calories_per_100g": 114,
+    "standard_serving_g": 210,
+    "standard_calories": 239,
+    "unit": "1공기"
+  },
+  "불고기": {
+    "calories_per_100g": 194,
+    "standard_serving_g": 150,
+    "standard_calories": 291,
+    "unit": "1인분"
+  },
+  "계란말이": {
+    "calories_per_100g": 154,
+    "standard_serving_g": 100,
+    "standard_calories": 154,
+    "unit": "1인분"
+  },
+  "김치": {
+    "calories_per_100g": 18,
+    "standard_serving_g": 50,
+    "standard_calories": 9,
+    "unit": "1접시"
+  },
+  "나물": {
+    "calories_per_100g": 35,
+    "standard_serving_g": 70,
+    "standard_calories": 25,
+    "unit": "1접시"
+  },
+  "라면": {
+    "calories_per_100g": 500,
+    "standard_serving_g": 120,
+    "standard_calories": 500,
+    "unit": "1봉지"
+  },
+  "짜장면": {
+    "calories_per_100g": 155,
+    "standard_serving_g": 500,
+    "standard_calories": 775,
+    "unit": "1인분"
+  }
+}

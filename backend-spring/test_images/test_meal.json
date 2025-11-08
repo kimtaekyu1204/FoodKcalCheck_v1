@@ -1,0 +1,13 @@
+{
+  "userUniqueCode": "TESTUSER01",
+  "mealDate": "2025-11-08",
+  "mealTime": "12:30:00",
+  "mealType": "LUNCH",
+  "foodCount": 2,
+  "food1Name": "쌀밥",
+  "food1Calories": 334,
+  "food2Name": "된장찌개",
+  "food2Calories": 147,
+  "food3Name": null,
+  "food3Calories": null
+}
