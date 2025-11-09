@@ -71,8 +71,22 @@ fun LoginPage(
                 } else {
                     errorMessage = response.message ?: "로그인에 실패했습니다"
                 }
+            } catch (e: retrofit2.HttpException) {
+                errorMessage = when (e.code()) {
+                    401 -> "이메일 또는 비밀번호가 올바르지 않습니다"
+                    404 -> "서버에 연결할 수 없습니다"
+                    500 -> "서버 오류가 발생했습니다"
+                    else -> "로그인 중 오류가 발생했습니다 (${e.code()})"
+                }
+                e.printStackTrace()
+            } catch (e: java.net.UnknownHostException) {
+                errorMessage = "서버에 연결할 수 없습니다\n인터넷 연결을 확인해주세요"
+                e.printStackTrace()
+            } catch (e: java.net.SocketTimeoutException) {
+                errorMessage = "서버 응답 시간 초과\n잠시 후 다시 시도해주세요"
+                e.printStackTrace()
             } catch (e: Exception) {
-                errorMessage = "네트워크 오류: ${e.message}"
+                errorMessage = "알 수 없는 오류: ${e.message}"
                 e.printStackTrace()
             } finally {
                 isLoading = false
@@ -143,7 +157,9 @@ fun LoginPage(
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.Gray
+                    unfocusedBorderColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
                 ),
                 shape = RoundedCornerShape(8.dp),
                 singleLine = true,
@@ -173,7 +189,9 @@ fun LoginPage(
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = Color.Gray
+                    unfocusedBorderColor = Color.Gray,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
                 ),
                 shape = RoundedCornerShape(8.dp),
                 singleLine = true,
@@ -270,127 +288,23 @@ fun LoginPage(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // 구분선
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            HorizontalDivider(
-                modifier = Modifier.weight(1f),
-                color = Color.Gray
+        // 회원가입 버튼
+        OutlinedButton(
+            onClick = onSignUpClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.primary
             )
-            Text(
-                text = "또는",
-                modifier = Modifier.padding(horizontal = 16.dp),
-                fontSize = 14.sp,
-                color = Color.Gray
-            )
-            HorizontalDivider(
-                modifier = Modifier.weight(1f),
-                color = Color.Gray
-            )
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // 소셜 로그인 버튼들
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            // Google 로그인
-            OutlinedButton(
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.Black
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Visibility, // 실제로는 Google 아이콘
-                    contentDescription = "Google",
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Google로 계속하기",
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
-            }
-
-            // Apple 로그인
-            OutlinedButton(
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.Black
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Visibility, // 실제로는 Apple 아이콘
-                    contentDescription = "Apple",
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Apple로 계속하기",
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
-            }
-
-            // 카카오 로그인
-            OutlinedButton(
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.Black
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Visibility, // 실제로는 카카오 아이콘
-                    contentDescription = "카카오",
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "카카오로 계속하기",
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        // 회원가입 링크
-        Row(
-            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "아직 계정이 없으신가요?",
-                fontSize = 14.sp,
-                color = Color.Gray
+                text = "회원가입",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
             )
-            Spacer(modifier = Modifier.width(4.dp))
-            TextButton(onClick = onSignUpClick) {
-                Text(
-                    text = "회원가입",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
         }
     }
 }
